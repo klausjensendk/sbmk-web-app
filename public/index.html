@@ -1,11 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Collection</title>
+  
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    test tset
+
+  <!-- Top Navigation / Header -->
+  <header class="top-bar">
+    <div class="brand">
+      <span class="brand-tag">SBMK Kitchen</span>
+      <h1>Family Recipe Vault</h1>
+    </div>
+    <button id="open-modal-btn" class="btn btn-primary">+ Add New Recipe</button>
+  </header>
+
+  <!-- Main 2-Column Grid Area -->
+  <main class="grid-container">
+    
+    <!-- Left Column: Sticky Sidebar / Category Filter -->
+    <aside class="sidebar-column">
+      <div class="sidebar-card">
+        <h3>Categories</h3>
+        <ul class="filter-list" id="category-filters">
+          <li class="active" data-category="all">All Recipes</li>
+          <li data-category="Mains">Mains</li>
+          <li data-category="Desserts">Desserts</li>
+          <li data-category="Pasta">Pasta</li>
+          <li data-category="Baking">Baking</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card stats-card">
+        <h3>Recipe Stats</h3>
+        <p>Total Recipes Saved: <strong id="recipe-count">0</strong></p>
+      </div>
+    </aside>
+
+    <!-- Right Column: Recipe Cards Grid -->
+    <section class="recipes-column">
+      <div id="loading-spinner" class="spinner">Loading recipes from database...</div>
+      <div id="recipe-grid" class="recipe-grid">
+        <!-- Recipe cards render here dynamically -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Add Recipe Modal -->
+  <div id="recipe-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Add a New Recipe</h2>
+        <button id="close-modal-btn" class="close-btn">&times;</button>
+      </div>
+      
+      <form id="add-recipe-form">
+        <div class="form-group">
+          <label for="recipe-title">Recipe Title</label>
+          <input type="text" id="recipe-title" required placeholder="e.g. Danish Flæskesteg med Rødkål">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="recipe-category">Category</label>
+            <select id="recipe-category">
+              <option value="Mains">Mains</option>
+              <option value="Desserts">Desserts</option>
+              <option value="Pasta">Pasta</option>
+              <option value="Baking">Baking</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="prep-time">Prep Time (mins)</label>
+            <input type="text" id="prep-time" placeholder="30 mins">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="recipe-ingredients">Ingredients (separated by lines)</label>
+          <textarea id="recipe-ingredients" rows="4" placeholder="500g Pasta&#10;2 cloves Garlic&#10;Olive oil"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="recipe-instructions">Instructions</label>
+          <textarea id="recipe-instructions" rows="4" placeholder="Step-by-step instructions..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary full-width">Save to Database</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript Entry Point -->
+  <script type="module" src="js/script.js"></script>
 </body>
 </html>
