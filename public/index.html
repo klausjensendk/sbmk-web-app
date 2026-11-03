@@ -3,58 +3,154 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recipe Collection</title>
+  <title>SBMK Kitchen | Curated Recipe Vault</title>
   
-  <!-- Google Fonts & Icons -->
+  <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- Top Navigation / Header -->
-  <header class="top-bar">
-    <div class="brand">
-      <span class="brand-tag">SBMK Kitchen</span>
-      <h1>Family Recipe Vault</h1>
+  <!-- TOP NAVIGATION BAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <span class="logo-accent">SBMK</span> Kitchen
+      </a>
+      
+      <nav class="nav-links">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#recipes-section" class="nav-link">Recipes</a>
+        <a href="#about-section" class="nav-link">About</a>
+        <a href="#footer" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Managed dynamically by script.js auth listener -->
+        <button id="open-modal-btn" class="btn btn-primary">+ Add Recipe</button>
+      </div>
     </div>
-    <button id="open-modal-btn" class="btn btn-primary">+ Add New Recipe</button>
   </header>
 
-  <!-- Main 2-Column Grid Area -->
-  <main class="grid-container">
-    
-    <!-- Left Column: Sticky Sidebar / Category Filter -->
-    <aside class="sidebar-column">
-      <div class="sidebar-card">
-        <h3>Categories</h3>
-        <ul class="filter-list" id="category-filters">
-          <li class="active" data-category="all">All Recipes</li>
-          <li data-category="Mains">Mains</li>
-          <li data-category="Desserts">Desserts</li>
-          <li data-category="Pasta">Pasta</li>
-          <li data-category="Baking">Baking</li>
+  <!-- HERO TOP SECTION -->
+  <section id="hero" class="hero-section">
+    <div class="hero-content">
+      <span class="hero-subtitle">Handcrafted Culinary Archive</span>
+      <h1 class="hero-title">A Collection of Family Recipes & Kitchen Stories</h1>
+      <p class="hero-description">
+        Explore a curated selection of home-cooked meals, traditional Danish favorites, and modern Mediterranean dishes.
+      </p>
+      <div class="hero-buttons">
+        <a href="#recipes-section" class="btn btn-primary btn-large">Browse Recipes</a>
+        <a href="#about-section" class="btn btn-secondary btn-large">Our Story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECIPES SECTION (2-Column Grid Layout) -->
+  <section id="recipes-section" class="section-container">
+    <div class="section-header">
+      <h2>The Recipe Collection</h2>
+      <p>Filter by category or explore the newest additions below.</p>
+    </div>
+
+    <main class="grid-container">
+      <!-- Left Column: Sticky Sidebar / Category Filter -->
+      <aside class="sidebar-column">
+        <div class="sidebar-card">
+          <h3>Categories</h3>
+          <ul class="filter-list" id="category-filters">
+            <li class="active" data-category="all">All Recipes</li>
+            <li data-category="Mains">Mains</li>
+            <li data-category="Desserts">Desserts</li>
+            <li data-category="Pasta">Pasta</li>
+            <li data-category="Baking">Baking</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card stats-card">
+          <h3>Vault Stats</h3>
+          <p>Total Recipes Saved: <strong id="recipe-count">0</strong></p>
+        </div>
+      </aside>
+
+      <!-- Right Column: Recipe Cards Grid -->
+      <section class="recipes-column">
+        <div id="loading-spinner" class="spinner">Loading recipes from database...</div>
+        <div id="recipe-grid" class="recipe-grid">
+          <!-- Recipe cards render dynamically via script.js -->
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <!-- FEATURE / ABOUT SECTION -->
+  <section id="about-section" class="about-section">
+    <div class="about-container">
+      <div class="about-card">
+        <div class="about-icon"><i class="fa-solid fa-utensils"></i></div>
+        <h3>Simplicity First</h3>
+        <p>No endless blog stories before the directions. Clean ingredients and straightforward steps.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon"><i class="fa-solid fa-cloud-bolt"></i></div>
+        <h3>Real-time Sync</h3>
+        <p>Powered by Cloud Firestore database for instantaneous updates across all connected devices.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3>Secure Storage</h3>
+        <p>Protected editing rights ensure only verified kitchen authors can add or delete recipes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (Legal Terms & External Links) -->
+  <footer id="footer" class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col brand-col">
+        <h3><span class="logo-accent">SBMK</span> Kitchen</h3>
+        <p>Preserving family recipes and daily meal inspiration with modern web engineering.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#recipes-section">Recipe Vault</a></li>
+          <li><a href="#about-section">About Project</a></li>
         </ul>
       </div>
 
-      <div class="sidebar-card stats-card">
-        <h3>Recipe Stats</h3>
-        <p>Total Recipes Saved: <strong id="recipe-count">0</strong></p>
+      <div class="footer-col">
+        <h4>External Links</h4>
+        <ul>
+          <li><a href="https://github.com/klausjensendk/sbmk-web-app" target="_blank" rel="noopener">GitHub Repository</a></li>
+          <li><a href="https://firebase.google.com/" target="_blank" rel="noopener">Firebase Platform</a></li>
+          <li><a href="https://console.firebase.google.com/" target="_blank" rel="noopener">Firebase Console</a></li>
+        </ul>
       </div>
-    </aside>
 
-    <!-- Right Column: Recipe Cards Grid -->
-    <section class="recipes-column">
-      <div id="loading-spinner" class="spinner">Loading recipes from database...</div>
-      <div id="recipe-grid" class="recipe-grid">
-        <!-- Recipe cards render here dynamically -->
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#" onclick="alert('Privacy Policy: No personal data is tracked or sold on this website.'); return false;">Privacy Policy</a></li>
+          <li><a href="#" onclick="alert('Terms of Use: This site is for personal culinary archival and recipe sharing.'); return false;">Terms of Use</a></li>
+          <li><a href="#" onclick="alert('License: Open source personal project setup.'); return false;">License</a></li>
+        </ul>
       </div>
-    </section>
-  </main>
+    </div>
 
-  <!-- Add Recipe Modal -->
+    <div class="footer-bottom">
+      <p>&copy; 2026 SBMK Kitchen. Built with Vanilla HTML/CSS/JS & Firebase.</p>
+    </div>
+  </footer>
+
+  <!-- ADD RECIPE MODAL -->
   <div id="recipe-modal" class="modal-overlay hidden">
     <div class="modal-content">
       <div class="modal-header">
@@ -82,6 +178,11 @@
             <label for="prep-time">Prep Time (mins)</label>
             <input type="text" id="prep-time" placeholder="30 mins">
           </div>
+        </div>
+
+        <div class="form-group">
+          <label for="recipe-image">Image URL</label>
+          <input type="url" id="recipe-image" placeholder="https://images.unsplash.com/...">
         </div>
 
         <div class="form-group">
