@@ -3,204 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SBMK Kitchen | Curated Recipe Vault</title>
+  <title>SBMK Kitchen | Curated Recipes</title>
   
-  <!-- Google Fonts & Font Awesome Icons -->
+  <!-- Google Fonts & FontAwesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- TOP NAVIGATION BAR -->
+  <!-- Top Navigation Bar -->
   <header class="navbar">
     <div class="nav-container">
-      <a href="#" class="brand-logo">
-        <span class="logo-accent">SBMK</span> Kitchen
-      </a>
+      <a href="#" class="brand-logo">SBMK Kitchen</a>
       
       <nav class="nav-links">
         <a href="#hero" class="nav-link active">Home</a>
-        <a href="#recipes-section" class="nav-link">Recipes</a>
+        <a href="#recipes-section" class="nav-link">Recipes <i class="fa-solid fa-chevron-down nav-arrow"></i></a>
         <a href="#about-section" class="nav-link">About</a>
         <a href="#footer" class="nav-link">Contact</a>
       </nav>
 
       <div class="nav-actions">
-        <!-- Managed dynamically by script.js auth listener -->
-        <button id="open-modal-btn" class="btn btn-primary">+ Add Recipe</button>
+        <!-- Add Button controlled by Auth state -->
+        <button id="open-modal-btn" class="btn btn-black btn-pill">+ Add Recipe</button>
       </div>
     </div>
   </header>
 
-  <!-- HERO TOP SECTION -->
+  <!-- Hero Section -->
   <section id="hero" class="hero-section">
     <div class="hero-content">
-      <span class="hero-subtitle">Handcrafted Culinary Archive</span>
-      <h1 class="hero-title">A Collection of Family Recipes & Kitchen Stories</h1>
+      <div class="pill-badge">
+        <span>We've Just Added Nutritious Recipes</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </div>
+
+      <h1 class="hero-title">Delicious Nutritious Recipes<br>For Every Meal</h1>
+      
       <p class="hero-description">
-        Explore a curated selection of home-cooked meals, traditional Danish favorites, and modern Mediterranean dishes.
+        Discover a wide range of recipes crafted to boost your health, support your fitness goals, and make nutritious eating enjoyable.
       </p>
+
       <div class="hero-buttons">
-        <a href="#recipes-section" class="btn btn-primary btn-large">Browse Recipes</a>
-        <a href="#about-section" class="btn btn-secondary btn-large">Our Story</a>
+        <a href="#recipes-section" class="btn btn-black btn-pill">Get Inspired</a>
+        <a href="#about-section" class="btn btn-outline btn-pill">Learn More</a>
+      </div>
+
+      <div class="social-proof">
+        <div class="avatar-group">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="User">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="User">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="User">
+        </div>
+        <div class="proof-items">
+          <span><i class="fa-regular fa-circle-check"></i> Trusted By Food Lovers</span>
+          <span><i class="fa-regular fa-circle-check"></i> No Ads</span>
+          <span><i class="fa-regular fa-circle-check"></i> A Wide Range Of Healthy Recipes</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image Ribbon Header Gallery -->
+    <div class="hero-gallery">
+      <div class="gallery-card">
+        <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80" alt="Salad Bowl">
+      </div>
+      <div class="gallery-card">
+        <img src="https://images.unsplash.com/photo-1610970881699-44a5587cabec?auto=format&fit=crop&w=600&q=80" alt="Green Smoothie">
+      </div>
+      <div class="gallery-card">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" alt="Healthy Bowl">
+      </div>
+      <div class="gallery-card">
+        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=600&q=80" alt="Toast and veggies">
       </div>
     </div>
   </section>
 
-  <!-- RECIPES SECTION (2-Column Grid Layout) -->
+  <!-- Recipe Section Header -->
   <section id="recipes-section" class="section-container">
-    <div class="section-header">
-      <h2>The Recipe Collection</h2>
-      <p>Filter by category or explore the newest additions below.</p>
+    <div class="section-intro">
+      <span class="sub-tag">{Discover Nourishing Food Recipes}</span>
+      <h2>Explore A World Of Healthy, Delicious Recipes Designed To Enhance Your Well-Being. Our Curated Collection Helps You Enjoy Flavorful Meals.</h2>
     </div>
 
     <main class="grid-container">
-      <!-- Left Column: Sticky Sidebar / Category Filter -->
+      <!-- Left Column Sidebar Filter -->
       <aside class="sidebar-column">
         <div class="sidebar-card">
           <h3>Categories</h3>
           <ul class="filter-list" id="category-filters">
-            <li class="active" data-category="all">All Recipes</li>
-            <li data-category="Mains">Mains</li>
-            <li data-category="Desserts">Desserts</li>
-            <li data-category="Pasta">Pasta</li>
-            <li data-category="Baking">Baking</li>
-          </ul>
-        </div>
-
-        <div class="sidebar-card stats-card">
-          <h3>Vault Stats</h3>
-          <p>Total Recipes Saved: <strong id="recipe-count">0</strong></p>
-        </div>
-      </aside>
-
-      <!-- Right Column: Recipe Cards Grid -->
-      <section class="recipes-column">
-        <div id="loading-spinner" class="spinner">Loading recipes from database...</div>
-        <div id="recipe-grid" class="recipe-grid">
-          <!-- Recipe cards render dynamically via script.js -->
-        </div>
-      </section>
-    </main>
-  </section>
-
-  <!-- FEATURE / ABOUT SECTION -->
-  <section id="about-section" class="about-section">
-    <div class="about-container">
-      <div class="about-card">
-        <div class="about-icon"><i class="fa-solid fa-utensils"></i></div>
-        <h3>Simplicity First</h3>
-        <p>No endless blog stories before the directions. Clean ingredients and straightforward steps.</p>
-      </div>
-      <div class="about-card">
-        <div class="about-icon"><i class="fa-solid fa-cloud-bolt"></i></div>
-        <h3>Real-time Sync</h3>
-        <p>Powered by Cloud Firestore database for instantaneous updates across all connected devices.</p>
-      </div>
-      <div class="about-card">
-        <div class="about-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <h3>Secure Storage</h3>
-        <p>Protected editing rights ensure only verified kitchen authors can add or delete recipes.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER (Legal Terms & External Links) -->
-  <footer id="footer" class="site-footer">
-    <div class="footer-container">
-      <div class="footer-col brand-col">
-        <h3><span class="logo-accent">SBMK</span> Kitchen</h3>
-        <p>Preserving family recipes and daily meal inspiration with modern web engineering.</p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#recipes-section">Recipe Vault</a></li>
-          <li><a href="#about-section">About Project</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>External Links</h4>
-        <ul>
-          <li><a href="https://github.com/klausjensendk/sbmk-web-app" target="_blank" rel="noopener">GitHub Repository</a></li>
-          <li><a href="https://firebase.google.com/" target="_blank" rel="noopener">Firebase Platform</a></li>
-          <li><a href="https://console.firebase.google.com/" target="_blank" rel="noopener">Firebase Console</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="#" onclick="alert('Privacy Policy: No personal data is tracked or sold on this website.'); return false;">Privacy Policy</a></li>
-          <li><a href="#" onclick="alert('Terms of Use: This site is for personal culinary archival and recipe sharing.'); return false;">Terms of Use</a></li>
-          <li><a href="#" onclick="alert('License: Open source personal project setup.'); return false;">License</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>&copy; 2026 SBMK Kitchen. Built with Vanilla HTML/CSS/JS & Firebase.</p>
-    </div>
-  </footer>
-
-  <!-- ADD RECIPE MODAL -->
-  <div id="recipe-modal" class="modal-overlay hidden">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Add a New Recipe</h2>
-        <button id="close-modal-btn" class="close-btn">&times;</button>
-      </div>
-      
-      <form id="add-recipe-form">
-        <div class="form-group">
-          <label for="recipe-title">Recipe Title</label>
-          <input type="text" id="recipe-title" required placeholder="e.g. Danish Flæskesteg med Rødkål">
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="recipe-category">Category</label>
-            <select id="recipe-category">
-              <option value="Mains">Mains</option>
-              <option value="Desserts">Desserts</option>
-              <option value="Pasta">Pasta</option>
-              <option value="Baking">Baking</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="prep-time">Prep Time (mins)</label>
-            <input type="text" id="prep-time" placeholder="30 mins">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="recipe-image">Image URL</label>
-          <input type="url" id="recipe-image" placeholder="https://images.unsplash.com/...">
-        </div>
-
-        <div class="form-group">
-          <label for="recipe-ingredients">Ingredients (separated by lines)</label>
-          <textarea id="recipe-ingredients" rows="4" placeholder="500g Pasta&#10;2 cloves Garlic&#10;Olive oil"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="recipe-instructions">Instructions</label>
-          <textarea id="recipe-instructions" rows="4" placeholder="Step-by-step instructions..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary full-width">Save to Database</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- JavaScript Entry Point -->
-  <script type="module" src="js/script.js"></script>
-</body>
-</html>
+            <li
