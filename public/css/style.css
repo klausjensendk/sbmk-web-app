@@ -105,7 +105,7 @@ body.baseline-grid-body {
 
 /* SIDEBAR */
 .col-sidebar {
-  border-right: 1px solid var(--grid-light);
+  border-right: 0px solid var(--grid-light);
   padding-right: var(--spacing-unit);
   display: flex;
   flex-direction: column;
@@ -213,7 +213,7 @@ body.baseline-grid-body {
   justify-content: space-between;
   align-items: flex-start;
   gap: 0.5rem;
-  border-bottom: 1px solid var(--grid-light);
+  border-bottom: 0px solid var(--grid-light);
   padding-bottom: 0.6rem;
 }
 
