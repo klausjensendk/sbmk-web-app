@@ -292,3 +292,74 @@ body.baseline-grid-body {
   font-weight: 200;
 }
 
+/* INSTRUCTIONS LIST WITH CUSTOM 1.    SPACING & INDENTED WRAP */
+.instructions-list {
+  list-style: none;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.instructions-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8em; /* 4-space equivalent separation between step number and text */
+}
+
+.instructions-list .step-num {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  min-width: 1.8em;
+  flex-shrink: 0;
+  color: var(--text-main);
+}
+
+.instructions-list .step-text {
+  flex-grow: 1;
+}
+
+/* FOOTER */
+.sheet-footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--grid-dark);
+  padding-top: var(--spacing-unit);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.sheet-footer .meta-label {
+  color: var(--accent-red);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.sheet-footer a {
+  color: var(--text-main);
+  text-decoration: underline;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 1024px) {
+  .sheet-grid-layout {
+    grid-template-columns: 1fr;
+  }
+  .col-sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--grid-light);
+    padding-right: 0;
+    padding-bottom: var(--spacing-unit);
+  }
+  .sheet-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .search-header-block {
+    width: 100%;
+    max-width: none;
+  }
+}
