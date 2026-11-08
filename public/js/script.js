@@ -26,6 +26,7 @@ const recipeCount = document.getElementById("recipe-count");
 const categoryFilters = document.getElementById("category-filters");
 const loadingSpinner = document.getElementById("loading-spinner");
 const searchInput = document.getElementById("recipe-search");
+const clearSearchBtn = document.getElementById("clearSearchBtn");
 
 let currentCategory = "all";
 let searchQuery = "";
@@ -140,7 +141,6 @@ function renderRecipes() {
     let instructionsHtml = "";
     if (steps.length > 0) {
       const itemsHtml = steps.map((step, index) => {
-        // Strip out existing leading numbers like "1. " or "1.    " if present
         const cleanedText = step.replace(/^\d+\.\s*/, '');
         const stepNumber = `${index + 1}.`;
         return `
@@ -177,10 +177,27 @@ function renderRecipes() {
   });
 }
 
-// Search Bar Input Listener
+// Search Bar Input Listener & Clear Button Toggle
 if (searchInput) {
   searchInput.addEventListener("input", (e) => {
     searchQuery = e.target.value.trim();
+    
+    // Show/hide clear button based on whether text is entered
+    if (clearSearchBtn) {
+      clearSearchBtn.style.display = searchQuery.length > 0 ? "block" : "none";
+    }
+    
+    renderRecipes();
+  });
+}
+
+// Clear Button Click Listener
+if (clearSearchBtn) {
+  clearSearchBtn.addEventListener("click", () => {
+    searchInput.value = "";
+    searchQuery = "";
+    clearSearchBtn.style.display = "none";
+    searchInput.focus();
     renderRecipes();
   });
 }

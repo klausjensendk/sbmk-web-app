@@ -22,9 +22,12 @@
         <p class="sub-headline">Cooking Together</p>
       </div>
       
-      <!-- SEARCH BAR -->
+      <!-- SEARCH BAR WITH CLEAR BUTTON -->
       <div class="search-header-block">
-        <input type="text" id="recipe-search" placeholder="search recipes by title or ingredients...">
+        <div class="search-container">
+          <input type="text" id="recipe-search" placeholder="search recipes by title or ingredients..." autocomplete="off">
+          <button type="button" id="clearSearchBtn" class="clear-btn" aria-label="Clear search">&times;</button>
+        </div>
       </div>
 
       <div class="meta-nav-block">
