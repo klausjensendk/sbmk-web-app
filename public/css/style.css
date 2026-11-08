@@ -266,7 +266,6 @@ body.baseline-grid-body {
   padding: 0.2rem 0.4rem;
   text-transform: uppercase;
   white-space: nowrap;
-  background-color: red;
 }
 
 .prep-time {
@@ -284,6 +283,7 @@ body.baseline-grid-body {
   margin-top: 0.75rem;
   margin-bottom: 0.25rem;
   text-transform: uppercase;
+  background-color: red;
 }
 
 .recipe-card ul {
