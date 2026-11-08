@@ -72,6 +72,7 @@ body.baseline-grid-body {
 .search-header-block {
   flex-grow: 1;
   max-width: 450px;
+  width: 100%;
 }
 
 .search-container {
@@ -79,6 +80,7 @@ body.baseline-grid-body {
   display: flex;
   align-items: center;
   width: 100%;
+  display: block;
 }
 
 #recipe-search {
@@ -89,6 +91,7 @@ body.baseline-grid-body {
   border: 1px solid var(--grid-dark);
   border-radius: 0;
   background-color: #ffffff;
+  box-sizing: border-box;
 }
 
 #recipe-search:focus {
