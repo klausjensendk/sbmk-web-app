@@ -234,6 +234,7 @@ body.baseline-grid-body {
   border-bottom: 1px solid var(--grid-dark);
   margin-bottom: 0.75rem;
   background-color: #f9f9f9;
+  background-color: red;
 }
 
 .recipe-image-container img {
