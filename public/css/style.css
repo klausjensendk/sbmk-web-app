@@ -363,3 +363,51 @@ body.baseline-grid-body {
     max-width: none;
   }
 }
+
+/* EDITORIAL SHEET CONTAINER */
+.editorial-sheet {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-left: var(--spacing-unit);
+  padding-right: var(--spacing-unit);
+  box-sizing: border-box;
+}
+
+/* RECIPE GRID MATRIX — ensure mobile uses a flexible single column */
+.baseline-recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-unit);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* MEDIA QUERY FOR MOBILE & TABLETS (< 1024px) */
+@media (max-width: 1024px) {
+  body.baseline-grid-body {
+    padding: 0.5rem; /* Reduce outer body padding on small screens */
+  }
+
+  .sheet-grid-layout {
+    grid-template-columns: 1fr; /* Forces sidebar and content into 1 single column */
+    gap: var(--spacing-unit);
+  }
+
+  .col-sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--grid-light);
+    padding-right: 0;
+    padding-bottom: var(--spacing-unit);
+  }
+
+  .sheet-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-header-block {
+    width: 100%;
+    max-width: none;
+  }
+}
