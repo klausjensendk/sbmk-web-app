@@ -283,9 +283,10 @@ body.baseline-grid-body {
   margin-top: 0.75rem;
   margin-bottom: 0.25rem;
   text-transform: uppercase;
-  background-color: red;
 }
 
 .recipe-card ul {
   list-style-position: inside;
-  font-size: 0.
+  font-size: 0.7rem;
+  background-color: red;
+}
