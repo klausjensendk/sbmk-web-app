@@ -31,7 +31,7 @@ let currentCategory = "all";
 let searchQuery = "";
 let allRecipesData = [];
 
-// Security helper to prevent XSS injection
+// Helper to escape HTML characters safely
 function escapeHTML(str) {
   if (!str) return "";
   return str.toString()
@@ -42,7 +42,7 @@ function escapeHTML(str) {
     .replace(/'/g, "&#039;");
 }
 
-// Real-time Firestore Listener
+// Real-time Firestore Database Listener
 const recipesRef = collection(db, "recipes");
 const q = query(recipesRef, orderBy("createdAt", "desc"));
 
@@ -59,7 +59,7 @@ onSnapshot(q, (snapshot) => {
   if (loadingSpinner) loadingSpinner.textContent = "Error loading database records.";
 });
 
-// Render Recipes Matrix based on Category Filter & Search Query
+// Render Recipe Matrix
 function renderRecipes() {
   if (!recipeGrid) return;
   recipeGrid.innerHTML = "";
@@ -69,7 +69,6 @@ function renderRecipes() {
       (recipe.category || recipe.Category || "").toLowerCase() === currentCategory.toLowerCase();
 
     if (!matchesCategory) return false;
-
     if (!searchQuery) return true;
     
     const title = (recipe.title || recipe.Title || "").toLowerCase();
@@ -87,7 +86,7 @@ function renderRecipes() {
     return title.includes(queryLower) || category.includes(queryLower) || ingText.includes(queryLower);
   });
 
-  if (recipeCount) recipeCount.textContent = allRecipesData.length;
+  if (recipeCount) recipeCount.textContent = filtered.length;
 
   if (filtered.length === 0) {
     recipeGrid.innerHTML = `<p class="caption-text" style="padding: 1.5rem;">No records found matching your criteria.</p>`;
@@ -100,13 +99,13 @@ function renderRecipes() {
     const prepTime = recipe.prepTime || recipe.preptime || recipe.PrepTime || "30 mins";
     const rawInstructions = recipe.instructions || recipe.Instructions || "";
 
-    // Image URL handling
+    // Local / External Image Handler
     const imageUrl = recipe.imageUrl || recipe.ImageUrl || recipe.image_url || "";
     const imageHtml = imageUrl 
       ? `<div class="recipe-image-container"><img src="${escapeHTML(imageUrl)}" alt="${escapeHTML(title)}" loading="lazy"></div>` 
       : "";
 
-    // Parse Ingredients
+    // Parse Ingredients List
     let ingredientsList = [];
     const rawIng = recipe.ingredients || recipe.Ingredients;
     if (Array.isArray(rawIng)) {
@@ -126,22 +125,34 @@ function renderRecipes() {
       .map(item => `<li>${escapeHTML(item)}</li>`)
       .join('');
 
-    // Parse Instructions into separate lines/steps
-    let instructionsList = [];
+    // Parse Instructions into "1.    Step text" multi-line list with precise indentation
+    let steps = [];
     if (typeof rawInstructions === 'string') {
       if (rawInstructions.includes('\n')) {
-        instructionsList = rawInstructions.split('\n');
+        steps = rawInstructions.split('\n').filter(s => s.trim() !== "");
       } else {
-        // If stored as a single line paragraph containing numbered sentences like "1. Do this. 2. Do that."
-        instructionsList = rawInstructions.split(/(?=\b\d+\.\s)/).filter(s => s.trim() !== "");
+        steps = rawInstructions.split(/(?=\b\d+\.\s)/).filter(s => s.trim() !== "");
       }
     } else if (Array.isArray(rawInstructions)) {
-      instructionsList = rawInstructions;
+      steps = rawInstructions;
     }
 
-    const instructionsHtml = instructionsList.length > 0 
-      ? `<ul class="instructions-list">${instructionsList.map(step => `<li>${escapeHTML(step.replace(/^\d+\.\s*/, ''))}</li>`).join('')}</ul>`
-      : `<p class="instructions-text">${escapeHTML(rawInstructions)}</p>`;
+    let instructionsHtml = "";
+    if (steps.length > 0) {
+      const itemsHtml = steps.map((step, index) => {
+        // Strip out existing leading numbers like "1. " or "1.    " if present
+        const cleanedText = step.replace(/^\d+\.\s*/, '');
+        const stepNumber = `${index + 1}.`;
+        return `
+          <li>
+            <span class="step-num">${stepNumber}</span>
+            <span class="step-text">${escapeHTML(cleanedText)}</span>
+          </li>`;
+      }).join('');
+      instructionsHtml = `<ul class="instructions-list">${itemsHtml}</ul>`;
+    } else {
+      instructionsHtml = `<p class="instructions-text">${escapeHTML(rawInstructions)}</p>`;
+    }
 
     const cardHtml = `
       <article class="recipe-card">
@@ -166,7 +177,7 @@ function renderRecipes() {
   });
 }
 
-// Search Input Live Listener
+// Search Bar Input Listener
 if (searchInput) {
   searchInput.addEventListener("input", (e) => {
     searchQuery = e.target.value.trim();
@@ -174,7 +185,7 @@ if (searchInput) {
   });
 }
 
-// Category Filter Click Handler
+// Category Navigation Listener
 if (categoryFilters) {
   categoryFilters.addEventListener("click", (e) => {
     const li = e.target.closest("li");
